@@ -10,7 +10,7 @@ namespace Pong
 
     public abstract class Mobile : Forme
     {
-        protected int _vitesse;
+        protected int _vitesse; //Speed of the mobile
 
         public Mobile(pongForm.Form1 context, int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, int vitesse) : base(context,r,g,b,x,y,hauteur,largeur,orientation)
         {

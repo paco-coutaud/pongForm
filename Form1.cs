@@ -13,50 +13,43 @@ using System.Threading;
 
 namespace pongForm
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form //Herite from Form
     {
         public Form1()
         {
             InitializeComponent();
-            this.BackColor = Color.White;
-            this.Width = 500;
-            this.Height = 500;
+            this.BackColor = Color.White; //Set background Color
+            this.Width = 500; //Set windows width
+            this.Height = 500; //Set window height
+            this.Text = "Animation Pong"; //Set windows title
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Reimplemente methods
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
             this.Paint += new PaintEventHandler(form1_paint);
         }
 
         private void form1_paint(Object sender, PaintEventArgs e)
         {
-            Thread myThread = new Thread(new ThreadStart(update));// new Thread(() => Run(0, 42)).Start();
-            myThread.Start();
-            /*Cercle firstC = new Cercle(this, 255, 0, 0, 10, 10, 20, 20, 1.0, 0);
-            firstC.dessine();
-
-            Triangle firstT = new Triangle(this, 0, 255, 0, 100, 70, 40, 20, 0.0, 0);
-            firstT.dessine();*/
-            /*Graphics graphic = CreateGraphics();
-            graphic.DrawRectangle(new Pen(color.getColor()), new Rectangle(20, 20, 100, 30));
-            graphic.Dispose();*/
+            Thread myThread = new Thread(new ThreadStart(update)); //Create Thread for Pong
+            myThread.Start(); //Demarre le thread (methode update)
         }
 
         private void update()
         {
-            PongT p = new PongT(this);
-            while(Thread.CurrentThread.IsAlive)
+            PongT p = new PongT(this); //Create Pong object
+            while(Thread.CurrentThread.IsAlive) //While current thread is alive
             {
-                p.execute();
-                Thread.Sleep(100);
+                p.execute(); //Execute method in Pong
+                Thread.Sleep(100); //Pause Thread
             }
         }
 
         private void Form1_FormClosing(Object sender, FormClosingEventArgs e)
         {
-            /*Thread.Sleep(3000);
-            Thread.CurrentThread.Abort();*/
+            //Not reimplemented yet, will be useful for closing app properly
         }
     }
 }
