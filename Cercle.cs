@@ -23,7 +23,7 @@ namespace Pong
 
         public override void deplace()
         {
-            //Update rectangle
+            //Updates rectangle
             rec.X+=1;
             rec.Y+=1;
         }

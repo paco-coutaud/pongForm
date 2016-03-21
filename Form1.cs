@@ -47,7 +47,7 @@ namespace pongForm
             while(Thread.CurrentThread.IsAlive) //While current thread is alive
             {
                 p.execute(); //Execute method in Pong
-                Thread.Sleep(100); //Pause Thread
+                Thread.Sleep(100); //Pause Thread (100ms)
             }
         }
 
