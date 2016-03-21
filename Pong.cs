@@ -31,6 +31,7 @@ namespace Pong
 
             foreach (Mobile element in listMobile)
             {
+                
                 element.deplace(); //Move mobiles
                 element.dessine(); //Draw
             }

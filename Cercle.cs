@@ -23,14 +23,9 @@ namespace Pong
 
         public override void deplace()
         {
-            _x += 1; //Update x atribute
-            _y += 1; //Update y attribute
-
             //Update rectangle
-            rec.X = _x;
-            rec.Y = _y;
-            rec.Height = _hauteur;
-            rec.Width = _largeur;
+            rec.X+=1;
+            rec.Y+=1;
         }
 
         public override void clear()

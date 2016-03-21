@@ -19,9 +19,12 @@ namespace pongForm
         {
             InitializeComponent();
             this.BackColor = Color.White; //Set background Color
-            this.Width = 500; //Set windows width
-            this.Height = 500; //Set window height
+            this.Width = 1920; //Set windows width
+            this.Height = 1080; //Set window height
             this.Text = "Animation Pong"; //Set windows title
+
+            Thread myThread = new Thread(new ThreadStart(update)); //Create Thread for Pong
+            myThread.Start(); //Demarre le thread (methode update)
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -33,8 +36,9 @@ namespace pongForm
 
         private void form1_paint(Object sender, PaintEventArgs e)
         {
-            Thread myThread = new Thread(new ThreadStart(update)); //Create Thread for Pong
-            myThread.Start(); //Demarre le thread (methode update)
+            //this.Invalidate();
+            /*Thread myThread = new Thread(new ThreadStart(update)); //Create Thread for Pong
+            myThread.Start(); //Demarre le thread (methode update)*/
         }
 
         private void update()
