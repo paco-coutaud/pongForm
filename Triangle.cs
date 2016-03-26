@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -20,7 +16,8 @@ namespace Pong
 
         //Fill mode
         private FillMode fillMethode;
-        public Triangle(pongForm.Form1 context, int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, int vitesse) : base(context,r,g,b,x,y,hauteur,largeur,orientation,vitesse)
+
+        public Triangle(int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, int vitesse) : base(r,g,b,x,y,hauteur,largeur,orientation,vitesse)
         {
             //points = new PointF[];
             point1 = new PointF(_x, _y);
@@ -34,12 +31,12 @@ namespace Pong
 
             fillMethode = FillMode.Winding;
         }
-        public override void dessine()
+        public override void dessine(Graphics e)
         {
-            graphic.FillPolygon(brush, points.ToArray(), fillMethode);
+            e.FillPolygon(brush, points.ToArray(), fillMethode);
         }
 
-        public override void deplace()
+        public override void deplace(int typeCollision)
         {
             point1.X += 1;
             point1.Y += 1;
@@ -53,16 +50,6 @@ namespace Pong
             points.Add(point2);
             points.Add(point3);
 
-        }
-
-        public override void clear()
-        {
-            graphic.Clear(Color.White); //Clear graphics
-        }
-
-        ~Triangle()
-        {
-            graphic.Dispose(); //Delete graphic
         }
     }
 }

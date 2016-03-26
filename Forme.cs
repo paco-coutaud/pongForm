@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
+﻿using System.Drawing;
 
 namespace Pong
 {
@@ -17,24 +10,50 @@ namespace Pong
         protected int _largeur; //largeur for form
         protected double _orientation; //Orientation for forme
         protected Couleur _color; //Color for form
-        protected Graphics graphic;
         protected SolidBrush brush;
-        protected pongForm.Form1 _context; //Context for forme
 
-        public Forme(pongForm.Form1 context, int r,int g, int b,int x, int y, int hauteur, int largeur, double orientation) //Constructor
+        public Forme(int r,int g, int b,int x, int y, int hauteur, int largeur, double orientation) //Constructor
         {
             //Initialize attributes
             _color = new Couleur(r, g, b);
+            brush = new SolidBrush(_color.getColor());
             _x = x;
             _y = y;
             _hauteur = hauteur;
             _largeur = largeur;
             _orientation = orientation;
-            brush = new SolidBrush(_color.getColor());
-            _context = context;
-            graphic = _context.CreateGraphics();
         }
 
-        public abstract void dessine(); //Dessine is abstract and need to be reimplemented in child class
+        public abstract void dessine(Graphics e); //Dessine is abstract and need to be reimplemented in child class
+
+        public int getX()
+        {
+            return _x;
+        }
+
+        public int getY()
+        {
+            return _y;
+        }
+
+        public int getWidth()
+        {
+            return _largeur;
+        }
+
+        public int getHeight()
+        {
+            return _hauteur;
+        }
+
+        public double getOrientation()
+        {
+            return _orientation;
+        }
+
+        public void setOrientation(double orientation)
+        {
+            _orientation = orientation;
+        }
     }
 }

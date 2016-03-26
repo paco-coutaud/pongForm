@@ -11,31 +11,71 @@ namespace Pong
     public class Cercle : Mobile //Herite from Mobile
     {
         private Rectangle rec;
-        public Cercle(pongForm.Form1 context, int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, int vitesse) : base(context,r,g,b,x,y,hauteur,largeur,orientation,vitesse)
+        public Cercle(int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, int vitesse) : base(r,g,b,x,y,hauteur,largeur,orientation,vitesse)
         {
             //Initialize attribute
             rec = new Rectangle(_x, _y, _largeur, _hauteur);
         }
-        public override void dessine()
+        public override void dessine(Graphics e)
         {
-            graphic.FillEllipse(brush, rec);
+            e.FillEllipse(brush, rec);
         }
 
-        public override void deplace()
+        public override void deplace(int typeCollision)
         {
             //Updates rectangle
-            rec.X+=1;
-            rec.Y+=1;
+            if(typeCollision == 0)
+            {
+                moveLeft();
+            }
+            else if(typeCollision == 1)
+            {
+                moveRight();
+            }
+            else if(typeCollision == 2)
+            {
+                moveDown();
+            }
+            else if(typeCollision == 3)
+            {
+                moveUp();
+            }
         }
 
-        public override void clear()
+        public void moveUp()
         {
-            graphic.Clear(Color.White); //Clear graphics
+            _y -= _vitesse; //(int)(1*_vitesse*Math.Sin(_orientation * (Math.PI / 180)));
+            _x += _vitesse;
+            //_x += 1;
+            rec.Y = _y;
+            rec.X = _x;
         }
 
-        ~Cercle()
+        public void moveDown()
         {
-            graphic.Dispose(); //Delete graphic
+            _x += _vitesse;
+            _y += _vitesse; //(int)(1*_vitesse * Math.Sin(_orientation * (Math.PI / 180)));
+            //_x += 1;
+            rec.Y = _y;
+            rec.X = _x;
+        }
+
+        public void moveRight()
+        {
+            _x += _vitesse;  //(int)(1*_vitesse * Math.Cos(_orientation * (Math.PI / 180)));
+            _y += _vitesse;
+            //_y += 1;
+            rec.X = _x;
+            rec.Y = _y;
+        }
+
+        public void moveLeft()
+        {
+            _x -= _vitesse;  //(int)(1*_vitesse * Math.Cos(_orientation * (Math.PI / 180)));
+            _y -= _vitesse;
+            //_y += 1;
+            rec.X = _x;
+            rec.Y = _y;
         }
     }
 }

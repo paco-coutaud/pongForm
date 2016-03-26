@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Drawing;
 
 namespace Pong
 {
@@ -11,16 +6,26 @@ namespace Pong
     public abstract class Mobile : Forme
     {
         protected int _vitesse; //Speed of the mobile
+        protected int _collision; //type of collision
 
-        public Mobile(pongForm.Form1 context, int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, int vitesse) : base(context,r,g,b,x,y,hauteur,largeur,orientation)
+        public Mobile(int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, int vitesse) : base(r,g,b,x,y,hauteur,largeur,orientation)
         {
+            _collision = 0;
             _vitesse = vitesse;
         }
 
-        public abstract override void dessine();
-        public abstract void deplace();
+        public int getCollision()
+        {
+            return _collision;
+        }
 
-        public abstract void clear();
+        public void setCollision(int collision)
+        {
+            _collision = collision;
+        }
+
+        public abstract override void dessine(Graphics e);
+        public abstract void deplace(int typeCollision);
     }
 
 }

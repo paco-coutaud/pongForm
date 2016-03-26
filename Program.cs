@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing;
-using System.Threading;
-using Pong;
 
-namespace pongForm
+namespace Pong
 {
     static class Program
     {
@@ -19,12 +13,8 @@ namespace pongForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form1 form = new Form1();
+            Pong form = new Pong();
             Application.Run(form);
-        }
-
-        static void update()
-        {
         }
     }
     
