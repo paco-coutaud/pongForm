@@ -40,12 +40,17 @@ namespace Pong
             {
                 moveUp();
             }
+
+            /*_y *= (int)(1 * _vitesse * Math.Sin(_orientation) * (Math.PI / 180));
+            _x *= (int)(1 * _vitesse * Math.Cos(_orientation) * (Math.PI / 180));
+            rec.X = _x;
+            rec.Y = _y;*/
         }
 
         public void moveUp()
         {
-            _y -= _vitesse; //(int)(1*_vitesse*Math.Sin(_orientation * (Math.PI / 180)));
-            _x += _vitesse;
+            _y -= _vitesse; //(int)(1*_vitesse*Math.Sin(_orientation) * (Math.PI / 180));
+            _x -= 1;
             //_x += 1;
             rec.Y = _y;
             rec.X = _x;
@@ -53,7 +58,7 @@ namespace Pong
 
         public void moveDown()
         {
-            _x += _vitesse;
+            _x += 1;
             _y += _vitesse; //(int)(1*_vitesse * Math.Sin(_orientation * (Math.PI / 180)));
             //_x += 1;
             rec.Y = _y;
@@ -62,8 +67,8 @@ namespace Pong
 
         public void moveRight()
         {
-            _x += _vitesse;  //(int)(1*_vitesse * Math.Cos(_orientation * (Math.PI / 180)));
-            _y += _vitesse;
+            _x += _vitesse; //(int)(1*_vitesse * Math.Cos(_orientation * (Math.PI / 180)));
+            _y += 1;
             //_y += 1;
             rec.X = _x;
             rec.Y = _y;
@@ -71,8 +76,8 @@ namespace Pong
 
         public void moveLeft()
         {
-            _x -= _vitesse;  //(int)(1*_vitesse * Math.Cos(_orientation * (Math.PI / 180)));
-            _y -= _vitesse;
+            _x -= _vitesse;//(int)(1*_vitesse * Math.Cos(_orientation * (Math.PI / 180)));
+            _y -= 1;
             //_y += 1;
             rec.X = _x;
             rec.Y = _y;

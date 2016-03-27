@@ -31,6 +31,11 @@
         private System.Windows.Forms.ToolStripMenuItem cercleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem triangleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem murToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ajouterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.Button button2;
     }
 }
 
