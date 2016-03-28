@@ -172,10 +172,19 @@ namespace Pong
             //Pour les bords
             for (int i = 0; i < listMobile.Count; i++)
             {
-                if((listMobile.ElementAt(i).getX() + listMobile.ElementAt(i).getWidth()) >= this.Width || listMobile.ElementAt(i).getX() <= 0 || listMobile.ElementAt(i).getY() <= 0 ||
+                /*if((listMobile.ElementAt(i).getX() + listMobile.ElementAt(i).getWidth()) >= this.Width || listMobile.ElementAt(i).getX() <= 0 || listMobile.ElementAt(i).getY() <= 0 ||
                     listMobile.ElementAt(i).getY() + listMobile.ElementAt(i).getHeight() >= this.Height)
                 {
                     listMobile.ElementAt(i).setOrientation(listMobile.ElementAt(i).getOrientation() + 90);
+                }*/
+
+                for(int j=0; j<listWall.Count; j++)
+                {
+                    if ((listMobile.ElementAt(i).getX() >= listWall.ElementAt(j).getX() + listWall.ElementAt(j).getWidth()) || (listMobile.ElementAt(i).getX() + listMobile.ElementAt(i).getWidth() <= listWall.ElementAt(j).getX()) // trop à gauche
+                    || (listMobile.ElementAt(i).getY() >= listWall.ElementAt(j).getY() + listWall.ElementAt(j).getHeight()) || (listMobile.ElementAt(i).getY() + listMobile.ElementAt(i).getHeight() <= listWall.ElementAt(j).getY()))
+                    {
+                        listMobile.ElementAt(i).setOrientation(listMobile.ElementAt(i).getOrientation() + 90);
+                    }
                 }
 
                 /*for(int j=0; j<listWall.Count;j++)
@@ -485,6 +494,8 @@ namespace Pong
         {
             listMobile.Clear();
             listWall.Clear();
+            listBox1.Items.Clear();
+            listBox1.Update();
             initializeEnvironment();
         }
 
