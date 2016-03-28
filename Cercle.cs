@@ -21,10 +21,15 @@ namespace Pong
             e.FillEllipse(brush, rec);
         }
 
+        public static void preview(Graphics e,int x,int y)
+        {
+            e.FillEllipse(new SolidBrush(Color.Black), new Rectangle(x, y, 20, 20));
+        }
+
         public override void deplace(int typeCollision)
         {
             //Updates rectangle
-            if(typeCollision == 0)
+            /*if(typeCollision == 0)
             {
                 moveLeft();
             }
@@ -39,12 +44,12 @@ namespace Pong
             else if(typeCollision == 3)
             {
                 moveUp();
-            }
+            }*/
 
-            /*_y *= (int)(1 * _vitesse * Math.Sin(_orientation) * (Math.PI / 180));
-            _x *= (int)(1 * _vitesse * Math.Cos(_orientation) * (Math.PI / 180));
+            _y += (int)(_vitesse * Math.Sin(_orientation * (Math.PI / 180)));
+            _x += (int)(_vitesse * Math.Cos(_orientation * (Math.PI / 180)));
             rec.X = _x;
-            rec.Y = _y;*/
+            rec.Y = _y;
         }
 
         public void moveUp()

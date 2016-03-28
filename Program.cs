@@ -13,7 +13,7 @@ namespace Pong
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Pong form = new Pong();
+            Pong form = new Pong("Animated Pong",600,600);
             Application.Run(form);
         }
     }

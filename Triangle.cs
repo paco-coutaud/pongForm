@@ -36,6 +36,20 @@ namespace Pong
             e.FillPolygon(brush, points.ToArray(), fillMethode);
         }
 
+        public static void preview(Graphics e, int x, int y)
+        {
+            PointF pointPreview1 = new PointF(x, y);
+            PointF pointPreview2 = new PointF(x + 20, y);
+            PointF pointPreview3 = new PointF(x + (20 / 2), y - 20);
+
+            List<PointF> pointsDemo = new List<PointF>();
+            pointsDemo.Add(pointPreview1);
+            pointsDemo.Add(pointPreview2);
+            pointsDemo.Add(pointPreview3);
+
+            e.FillPolygon(new SolidBrush(Color.Black), pointsDemo.ToArray(), FillMode.Winding);
+        }
+
         public override void deplace(int typeCollision)
         {
             point1.X += 1;
