@@ -31,7 +31,7 @@ namespace Pong
 
             fillMethode = FillMode.Winding;
         }
-        public override void dessine(Graphics e)
+        public override void draw(Graphics e)
         {
             e.FillPolygon(brush, points.ToArray(), fillMethode);
         }
@@ -50,7 +50,7 @@ namespace Pong
             e.FillPolygon(new SolidBrush(Color.Black), pointsDemo.ToArray(), FillMode.Winding);
         }
 
-        public override void deplace(int typeCollision)
+        public override void move()
         {
             point1.X += 1;
             point1.Y += 1;

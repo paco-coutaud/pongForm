@@ -19,27 +19,10 @@
             }
             base.Dispose(disposing);
         }
-
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem couleurToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bleuToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem vertToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rougeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem formeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cercleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem triangleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem murToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ajouterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.MenuStrip globalMenu;
         private System.Windows.Forms.ToolStripMenuItem actionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;

@@ -10,7 +10,7 @@ namespace Pong
     {
         //Contains mobile elements
         private List<Mobile> listMobile; //Contains mobile elements
-        private List<Mur> listWall; //Contains wall elements
+        private List<Wall> listWall; //Contains wall elements
         private bool running; //Useful to know if the animation is lauch
         private bool addWallBool; //Useful to know if we are adding a wall
         private bool addCircleBool;
@@ -23,6 +23,9 @@ namespace Pong
             initStateVariable();
             initListAttributes();
             initializeEnvironment();
+
+            System.Diagnostics.Debug.Write("Il y a " + listWall.Count + "murs dans la liste");
+            System.Diagnostics.Debug.Write("Il y a " + listMobile.Count + "mobiles dans la liste");
         }
 
         private void initWindowsProperties(String title, int windowsWidth,int windowsHeight)
@@ -57,7 +60,7 @@ namespace Pong
         {
             //Initialize list attributes
             listMobile = new List<Mobile>();
-            listWall = new List<Mur>();
+            listWall = new List<Wall>();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -77,7 +80,7 @@ namespace Pong
                 if(addWallBool == true)
                 {
                     showPositionWall(e.Graphics); //Show the wall we are adding on screen
-                    Invalidate(); //Useful to invalidate windows forms and redraw elements
+                    //Invalidate(); //Useful to invalidate windows forms and redraw elements
                 }
                 if(addCircleBool == true)
                 {
@@ -116,33 +119,33 @@ namespace Pong
             {
                 if (i % 2 == 0) //i pair
                 {
-                    addWall(new Mur(0, 0, 0, j * 40, 30, 20, 40, 0, 0)); //Black color
-                    addWall(new Mur(0, 0, 0, j * 40, this.Height-70, 20, 40, 0, 0)); //Black color
+                    addWall(new Wall(0, 0, 0, j * 40, 30, 20, 40, 0, 0)); //Black color
+                    addWall(new Wall(0, 0, 0, j * 40, this.Height-110, 20, 40, 0, 0)); //Black color
                 }
                 else
                 {
-                    addWall(new Mur(255, 0, 0, j * 40, 30, 20, 40, 0, 0)); //red color
-                    addWall(new Mur(255, 0, 0, j * 40, this.Height - 70,20, 40, 0, 0)); //Black color
+                    addWall(new Wall(255, 0, 0, j * 40, 30, 20, 40, 0, 0)); //red color
+                    addWall(new Wall(255, 0, 0, j * 40, this.Height - 110,20, 40, 0, 0)); //Black color
                 }
 
                 i++;
+            }
 
-                for (int k = 0; k < (int)(((this.Height-100))/40); k++)
+            for (int k = 0; k < (int)(((this.Height - 100)) / 40); k++)
+            {
+                if (l % 2 == 0)
                 {
-                    if (l % 2 == 0)
-                    {
-                        addWall(new Mur(0, 0, 0, 0, 50 + k * 40, 40, 20, 0, 0));
-                        addWall(new Mur(0, 0, 0, (this.Width)-140, 50 + k * 40, 40, 20, 0, 0));
+                    addWall(new Wall(0, 0, 0, 0, 30 + k * 40, 40, 20, 0, 0));
+                    addWall(new Wall(0, 0, 0, (this.Width) - 140, 30 + k * 40, 40, 20, 0, 0));
 
-                    }
-                    else
-                    {
-                        addWall(new Mur(255, 0, 0, 0, 50 + k * 40, 40, 20, 0, 0));
-                        addWall(new Mur(255, 0, 0, this.Width-140, 50 + k * 40,40, 20, 0, 0));
-                    }
-
-                    l++;
                 }
+                else
+                {
+                    addWall(new Wall(255, 0, 0, 0, 30 + k * 40, 40, 20, 0, 0));
+                    addWall(new Wall(255, 0, 0, this.Width - 140, 30 + k * 40, 40, 20, 0, 0));
+                }
+
+                l++;
             }
         }
         public void initializeEnvironment()
@@ -153,25 +156,26 @@ namespace Pong
 
         public void execute(Graphics e)
         {
-            foreach (Mur element in listWall)
+            foreach (Wall element in listWall)
             {
-                element.dessine(e); //Draw walls
+                element.draw(e); //Draw walls
             }
 
             foreach (Mobile element in listMobile)
             {
-                Collision(); //Check mobiles collision
-                element.deplace(element.getCollision()); //Move mobiles with collision contraints
-                element.dessine(e); //Draw mobiles
+                Collision(element); //Check mobiles collision
+                
+                //element.deplace(element.getCollision()); //Move mobiles with collision contraints
+                element.draw(e); //Draw mobiles
                 //System.Diagnostics.Debug.WriteLine("x : " + element.getX() + " y : " + element.getY()); //Useful for debugging
             }
         }
 
-        public void Collision() //Currently not working
+        public void Collision(Mobile m) //Currently not working
         {
             //Pour les bords
-            for (int i = 0; i < listMobile.Count; i++)
-            {
+            //for (int i = 0; i < listMobile.Count; i++)
+            //{
                 /*if((listMobile.ElementAt(i).getX() + listMobile.ElementAt(i).getWidth()) >= this.Width || listMobile.ElementAt(i).getX() <= 0 || listMobile.ElementAt(i).getY() <= 0 ||
                     listMobile.ElementAt(i).getY() + listMobile.ElementAt(i).getHeight() >= this.Height)
                 {
@@ -180,18 +184,20 @@ namespace Pong
 
                 for(int j=0; j<listWall.Count; j++)
                 {
-                    if ((listMobile.ElementAt(i).getX() >= listWall.ElementAt(j).getX() + listWall.ElementAt(j).getWidth()) || (listMobile.ElementAt(i).getX() + listMobile.ElementAt(i).getWidth() <= listWall.ElementAt(j).getX()) // trop à gauche
-                    || (listMobile.ElementAt(i).getY() >= listWall.ElementAt(j).getY() + listWall.ElementAt(j).getHeight()) || (listMobile.ElementAt(i).getY() + listMobile.ElementAt(i).getHeight() <= listWall.ElementAt(j).getY()))
+                    if ((m.getX() >= (listWall.ElementAt(j).getX() + listWall.ElementAt(j).getWidth())) || ((m.getX() + m.getWidth()) <= listWall.ElementAt(j).getX()) // trop à gauche
+                    || (m.getY() >= (listWall.ElementAt(j).getY() + listWall.ElementAt(j).getHeight())) || ((m.getY() + m.getHeight()) <= listWall.ElementAt(j).getY()))
                     {
-                        listMobile.ElementAt(i).setOrientation(listMobile.ElementAt(i).getOrientation() + 90);
+                        m.setOrientation(m.getOrientation() + 90);
                     }
                 }
 
-                /*for(int j=0; j<listWall.Count;j++)
-                {
-                    if((listMobile.ElementAt(i).getX() + listMobile.ElementAt(i).getWidth()) >= listWall.ElementAt(i).getX() && (listMobile.ElementAt(i).getY() + listMobile.ElementAt(i).getWidth())
-                }*/
-            }
+            m.move();
+
+            /*for(int j=0; j<listWall.Count;j++)
+            {
+                if((listMobile.ElementAt(i).getX() + listMobile.ElementAt(i).getWidth()) >= listWall.ElementAt(i).getX() && (listMobile.ElementAt(i).getY() + listMobile.ElementAt(i).getWidth())
+            }*/
+            // }
         }
 
         /*This method provide a simple way to add mobile element into the list
@@ -203,7 +209,7 @@ namespace Pong
 
         /*This method provide a simple way to add wall element into the list
         It take one argument : w is the wall to add*/
-        public void addWall(Mur w)
+        public void addWall(Wall w)
         {
             listWall.Add(w);
         }
@@ -221,7 +227,7 @@ namespace Pong
         public void showPositionCircle(Graphics e)
         {
             var cor = PointToClient(Cursor.Position);
-            Cercle.preview(e, cor.X, cor.Y);
+            Circle.preview(e, cor.X, cor.Y);
         }
 
         public void showPositionTriangle(Graphics e)
@@ -355,18 +361,18 @@ namespace Pong
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(480, 30);
+            this.listBox1.Location = new System.Drawing.Point(490, 30);
             this.listBox1.Margin = new System.Windows.Forms.Padding(0, 0, 100, 0);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(100, 147);
+            this.listBox1.Size = new System.Drawing.Size(90, 147);
             this.listBox1.TabIndex = 7;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // buttonDeleteElement
             // 
-            this.buttonDeleteElement.Location = new System.Drawing.Point(480, 338);
+            this.buttonDeleteElement.Location = new System.Drawing.Point(490, 338);
             this.buttonDeleteElement.Name = "buttonDeleteElement";
-            this.buttonDeleteElement.Size = new System.Drawing.Size(100, 39);
+            this.buttonDeleteElement.Size = new System.Drawing.Size(90, 39);
             this.buttonDeleteElement.TabIndex = 8;
             this.buttonDeleteElement.Text = "Delete Mobile Selected";
             this.buttonDeleteElement.UseVisualStyleBackColor = true;
@@ -374,27 +380,30 @@ namespace Pong
             // 
             // buttonChangeMobileColor
             // 
-            this.buttonChangeMobileColor.Location = new System.Drawing.Point(480, 195);
+            this.buttonChangeMobileColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonChangeMobileColor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonChangeMobileColor.Location = new System.Drawing.Point(490, 195);
             this.buttonChangeMobileColor.Name = "buttonChangeMobileColor";
-            this.buttonChangeMobileColor.Size = new System.Drawing.Size(100, 45);
+            this.buttonChangeMobileColor.Size = new System.Drawing.Size(90, 45);
             this.buttonChangeMobileColor.TabIndex = 9;
             this.buttonChangeMobileColor.Text = "Change Mobile Color";
+            this.buttonChangeMobileColor.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.buttonChangeMobileColor.UseVisualStyleBackColor = true;
             // 
             // buttonIncreaseSpeed
             // 
-            this.buttonIncreaseSpeed.Location = new System.Drawing.Point(480, 246);
+            this.buttonIncreaseSpeed.Location = new System.Drawing.Point(490, 246);
             this.buttonIncreaseSpeed.Name = "buttonIncreaseSpeed";
-            this.buttonIncreaseSpeed.Size = new System.Drawing.Size(100, 41);
+            this.buttonIncreaseSpeed.Size = new System.Drawing.Size(90, 41);
             this.buttonIncreaseSpeed.TabIndex = 10;
             this.buttonIncreaseSpeed.Text = "Increase Speed";
             this.buttonIncreaseSpeed.UseVisualStyleBackColor = true;
             // 
             // buttonDecreaseSpeed
             // 
-            this.buttonDecreaseSpeed.Location = new System.Drawing.Point(480, 293);
+            this.buttonDecreaseSpeed.Location = new System.Drawing.Point(490, 293);
             this.buttonDecreaseSpeed.Name = "buttonDecreaseSpeed";
-            this.buttonDecreaseSpeed.Size = new System.Drawing.Size(100, 39);
+            this.buttonDecreaseSpeed.Size = new System.Drawing.Size(90, 39);
             this.buttonDecreaseSpeed.TabIndex = 11;
             this.buttonDecreaseSpeed.Text = "Decrease Speed";
             this.buttonDecreaseSpeed.UseVisualStyleBackColor = true;
@@ -457,7 +466,7 @@ namespace Pong
         private void addWallClick(object sender, EventArgs e)
         {
                 addWallBool = true; //We are currently adding a new wall
-                Invalidate();
+                //Invalidate();
         }
 
         /*Will be call only if there is a click on the windows form region is receive*/
@@ -466,16 +475,19 @@ namespace Pong
             if(addWallBool == true) //If we are adding a wall
             {
                 var cor = PointToClient(Cursor.Position);
-                addWall(new Mur(0, 0, 0, cor.X, cor.Y, 40, 40, 0, 0)); //We add the wall to the list
+                addWall(new Wall(0, 0, 0, cor.X, cor.Y, 40, 40, 0, 0)); //We add the wall to the list
+                System.Threading.Thread.Sleep(2);
                 addWallBool = false; //We are not adding a wall because it's the previous step
+                System.Diagnostics.Debug.WriteLine("Il y a " + listWall.Count + " murs dans la liste");
                 //listBox2.Items.Add(listWall.Count);
                 //listBox2.Update();
+                //Invalidate();
             }
             if(addCircleBool == true)
             {
                 Random rand = new Random(); //Initialize new instance of Random.
-                int randWidthHeight = rand.Next(20, 120); //Generate the same aleatory width/height
-                addMobile(new Cercle(rand.Next(0, 255), rand.Next(0, 255), rand.Next(0, 255), PointToClient(Cursor.Position).X, PointToClient(Cursor.Position).Y, randWidthHeight, randWidthHeight, rand.Next(0, 90), rand.Next(1, 5)));
+                int randWidthHeight = rand.Next(20, 70); //Generate the same aleatory width/height
+                addMobile(new Circle(rand.Next(0, 255), rand.Next(0, 255), rand.Next(0, 255), PointToClient(Cursor.Position).X, PointToClient(Cursor.Position).Y, randWidthHeight, randWidthHeight, rand.Next(10,80), 2));
                 addCircleBool = false;
                 listBox1.Items.Add(listMobile.Count);
                 listBox1.Update();

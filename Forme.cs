@@ -24,7 +24,7 @@ namespace Pong
             _orientation = orientation;
         }
 
-        public abstract void dessine(Graphics e); //Dessine is abstract and need to be reimplemented in child class
+        public abstract void draw(Graphics e); //Dessine is abstract and need to be reimplemented in child class
 
         public int getX()
         {

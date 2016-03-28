@@ -1,7 +1,16 @@
-﻿using System.Drawing;
+﻿/****************************
+****AUTHOR : Paco COUTAUD****
+****AUTHOR : Gauthier CASTRO*
+**LAST CHANGES : 28/03/2016**
+****************************/
+
+using System.Drawing;
 
 namespace Pong
 {
+    /******************
+    ****CONSTRUCTOR****
+    ******************/
     public class Couleur
     {
         private int _r;
@@ -19,6 +28,9 @@ namespace Pong
             _color = Color.FromArgb(_r, _v, _b);
         }
 
+        /*****************
+        **PUBLIC METHODS**
+        *****************/
         public Color getColor()
         {
             return _color;
