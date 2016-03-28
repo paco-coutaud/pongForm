@@ -48,6 +48,11 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button buttonDeleteElement;
+        private System.Windows.Forms.Button buttonChangeMobileColor;
+        private System.Windows.Forms.Button buttonIncreaseSpeed;
+        private System.Windows.Forms.Button buttonDecreaseSpeed;
     }
 }
 

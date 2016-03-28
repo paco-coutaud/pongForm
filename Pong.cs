@@ -33,6 +33,12 @@ namespace Pong
             this.Height = windowsHeight; //Set window height
             this.Text = title; //Set windows title
 
+            this.buttonDeleteElement.Enabled = false;
+            this.buttonChangeMobileColor.Enabled = false;
+            this.buttonDecreaseSpeed.Enabled = false;
+            this.buttonIncreaseSpeed.Enabled = false;
+            //this.buttonDeleteWall.Enabled = false;
+
             //Enable double buffering to disable flickering
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             this.UpdateStyles();
@@ -106,7 +112,7 @@ namespace Pong
         {
             int i = 0;
             int l = 0;
-            for (int j = 0; j < (int)(this.Width/40); j++) //For lines
+            for (int j = 0; j < (int)((this.Width-100)/40); j++) //For lines
             {
                 if (i % 2 == 0) //i pair
                 {
@@ -121,18 +127,18 @@ namespace Pong
 
                 i++;
 
-                for (int k = 0; k < (int)((this.Height)/40)-2; k++)
+                for (int k = 0; k < (int)(((this.Height-100))/40); k++)
                 {
                     if (l % 2 == 0)
                     {
                         addWall(new Mur(0, 0, 0, 0, 50 + k * 40, 40, 20, 0, 0));
-                        addWall(new Mur(0, 0, 0, (this.Width)-40, 50 + k * 40, 40, 20, 0, 0));
+                        addWall(new Mur(0, 0, 0, (this.Width)-140, 50 + k * 40, 40, 20, 0, 0));
 
                     }
                     else
                     {
                         addWall(new Mur(255, 0, 0, 0, 50 + k * 40, 40, 20, 0, 0));
-                        addWall(new Mur(255, 0, 0, this.Width-40, 50 + k * 40, 40, 20, 0, 0));
+                        addWall(new Mur(255, 0, 0, this.Width-140, 50 + k * 40,40, 20, 0, 0));
                     }
 
                     l++;
@@ -231,6 +237,11 @@ namespace Pong
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.buttonDeleteElement = new System.Windows.Forms.Button();
+            this.buttonChangeMobileColor = new System.Windows.Forms.Button();
+            this.buttonIncreaseSpeed = new System.Windows.Forms.Button();
+            this.buttonDecreaseSpeed = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.globalMenu.SuspendLayout();
             this.SuspendLayout();
@@ -332,10 +343,62 @@ namespace Pong
             this.toolStripMenuItem7.Text = "Mur";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.addWallClick);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(480, 30);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(0, 0, 100, 0);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(100, 147);
+            this.listBox1.TabIndex = 7;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // buttonDeleteElement
+            // 
+            this.buttonDeleteElement.Location = new System.Drawing.Point(480, 338);
+            this.buttonDeleteElement.Name = "buttonDeleteElement";
+            this.buttonDeleteElement.Size = new System.Drawing.Size(100, 39);
+            this.buttonDeleteElement.TabIndex = 8;
+            this.buttonDeleteElement.Text = "Delete Mobile Selected";
+            this.buttonDeleteElement.UseVisualStyleBackColor = true;
+            this.buttonDeleteElement.Click += new System.EventHandler(this.buttonDeleteElement_Click);
+            // 
+            // buttonChangeMobileColor
+            // 
+            this.buttonChangeMobileColor.Location = new System.Drawing.Point(480, 195);
+            this.buttonChangeMobileColor.Name = "buttonChangeMobileColor";
+            this.buttonChangeMobileColor.Size = new System.Drawing.Size(100, 45);
+            this.buttonChangeMobileColor.TabIndex = 9;
+            this.buttonChangeMobileColor.Text = "Change Mobile Color";
+            this.buttonChangeMobileColor.UseVisualStyleBackColor = true;
+            // 
+            // buttonIncreaseSpeed
+            // 
+            this.buttonIncreaseSpeed.Location = new System.Drawing.Point(480, 246);
+            this.buttonIncreaseSpeed.Name = "buttonIncreaseSpeed";
+            this.buttonIncreaseSpeed.Size = new System.Drawing.Size(100, 41);
+            this.buttonIncreaseSpeed.TabIndex = 10;
+            this.buttonIncreaseSpeed.Text = "Increase Speed";
+            this.buttonIncreaseSpeed.UseVisualStyleBackColor = true;
+            // 
+            // buttonDecreaseSpeed
+            // 
+            this.buttonDecreaseSpeed.Location = new System.Drawing.Point(480, 293);
+            this.buttonDecreaseSpeed.Name = "buttonDecreaseSpeed";
+            this.buttonDecreaseSpeed.Size = new System.Drawing.Size(100, 39);
+            this.buttonDecreaseSpeed.TabIndex = 11;
+            this.buttonDecreaseSpeed.Text = "Decrease Speed";
+            this.buttonDecreaseSpeed.UseVisualStyleBackColor = true;
+            // 
             // Pong
             // 
-            this.ClientSize = new System.Drawing.Size(652, 328);
+            this.ClientSize = new System.Drawing.Size(652, 446);
             this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.buttonDecreaseSpeed);
+            this.Controls.Add(this.buttonIncreaseSpeed);
+            this.Controls.Add(this.buttonChangeMobileColor);
+            this.Controls.Add(this.buttonDeleteElement);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.globalMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.globalMenu;
@@ -396,6 +459,8 @@ namespace Pong
                 var cor = PointToClient(Cursor.Position);
                 addWall(new Mur(0, 0, 0, cor.X, cor.Y, 40, 40, 0, 0)); //We add the wall to the list
                 addWallBool = false; //We are not adding a wall because it's the previous step
+                //listBox2.Items.Add(listWall.Count);
+                //listBox2.Update();
             }
             if(addCircleBool == true)
             {
@@ -403,6 +468,8 @@ namespace Pong
                 int randWidthHeight = rand.Next(20, 120); //Generate the same aleatory width/height
                 addMobile(new Cercle(rand.Next(0, 255), rand.Next(0, 255), rand.Next(0, 255), PointToClient(Cursor.Position).X, PointToClient(Cursor.Position).Y, randWidthHeight, randWidthHeight, rand.Next(0, 90), rand.Next(1, 5)));
                 addCircleBool = false;
+                listBox1.Items.Add(listMobile.Count);
+                listBox1.Update();
             }
             if(addTriangleBool == true)
             {
@@ -410,6 +477,7 @@ namespace Pong
                 int randWidthHeight = rand.Next(20, 120); //Generate the same aleatory width/height
                 addMobile(new Triangle(rand.Next(0, 255), rand.Next(0, 255), rand.Next(0, 255), MousePosition.X, MousePosition.Y, randWidthHeight, randWidthHeight, rand.Next(10, 90), 0));
                 addTriangleBool = false;
+                listBox1.Update();
             }
         }
 
@@ -419,5 +487,41 @@ namespace Pong
             listWall.Clear();
             initializeEnvironment();
         }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buttonDeleteElement.Enabled = true;
+        }
+
+        private void buttonDeleteElement_Click(object sender, EventArgs e)
+        {
+            if(listBox1.Items.Count != 0) //If listBox isn't empty
+            {
+                int tmp = listBox1.SelectedIndex;
+                listMobile.RemoveAt(tmp);
+                listBox1.Items.RemoveAt(tmp);
+                listBox1.Update();
+                buttonDeleteElement.Enabled = false;
+                buttonDeleteElement.Update();
+            }
+        }
+
+        /*private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buttonDeleteWall.Enabled = true;
+        }
+
+        private void buttonDeleteWall_Click(object sender, EventArgs e)
+        {
+            if (listBox2.Items.Count != 0) //If listBox isn't empty
+            {
+                int tmp = listWall.Count + listBox2.SelectedIndex;
+                listWall.RemoveAt(tmp);
+                listBox2.Items.RemoveAt(listBox2.SelectedIndex);
+                listBox2.Update();
+                buttonDeleteWall.Enabled = false;
+                buttonDeleteWall.Update();
+            }
+        }*/
     }
 }
