@@ -35,5 +35,10 @@ namespace Pong
         {
             return _color;
         }
+
+        public void setColor(int r, int v, int b)
+        {
+            _color = Color.FromArgb(r, v, b);
+        }
     }
 }

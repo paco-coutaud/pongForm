@@ -4,12 +4,12 @@ namespace Pong
 {
     public abstract class Forme
     {
-        protected int _x; //x for forme
-        protected int _y; //y for forme
-        protected int _hauteur; //hauteur for form
-        protected int _largeur; //largeur for form
-        protected double _orientation; //Orientation for forme
-        protected Couleur _color; //Color for form
+        public int _x { get; set; } //x for forme
+        public int _y { get; set; } //y for forme
+        public int _hauteur { get; set; }//hauteur for form
+        public int _largeur; //largeur for form
+        public double _orientation; //Orientation for forme
+        public Couleur _color; //Color for form
         protected SolidBrush brush;
 
         public Forme(int r,int g, int b,int x, int y, int hauteur, int largeur, double orientation) //Constructor

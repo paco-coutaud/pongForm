@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System;
 
 namespace Pong
 {
@@ -17,12 +18,12 @@ namespace Pong
         //Fill mode
         private FillMode fillMethode;
 
-        public Triangle(int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, int vitesse) : base(r,g,b,x,y,hauteur,largeur,orientation,vitesse)
+        public Triangle(int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, double vitesse) : base(r,g,b,x,y,hauteur,largeur,orientation,vitesse)
         {
             //points = new PointF[];
-            point1 = new PointF(_x, _y);
-            point2 = new PointF(_x + _largeur, _y);
-            point3 = new PointF(_x + (_largeur / 2), _y - _hauteur);
+            point1 = new PointF(_x, _y + _hauteur);
+            point2 = new PointF(_x + _largeur, _y + _hauteur);
+            point3 = new PointF(_x + (_largeur/2), _y);
 
             points = new List<PointF>();
             points.Add(point1);
@@ -33,6 +34,7 @@ namespace Pong
         }
         public override void draw(Graphics e)
         {
+            brush.Color = _color.getColor();
             e.FillPolygon(brush, points.ToArray(), fillMethode);
         }
 
@@ -52,18 +54,28 @@ namespace Pong
 
         public override void move()
         {
+            /*
             point1.X += 1;
             point1.Y += 1;
             point2.X += 1;
             point2.Y += 1;
             point3.X += 1;
-            point3.Y += 1;
+            point3.Y += 1;*/
+            _x += (int)(_vitesse * Math.Cos(_orientation * (Math.PI / 180)));
+            _y += (int)(_vitesse * Math.Sin(_orientation * (Math.PI / 180)));
+
+            point1.X = _x;
+            point1.Y = _y + _hauteur;
+            point2.X = _x + _largeur;
+            point2.Y = _y + _hauteur;
+            point3.X = _x + (_largeur / 2);
+            point3.Y = _y;
 
             points.Clear();
             points.Add(point1);
             points.Add(point2);
             points.Add(point3);
 
-        }
-    }
+}
+}
 }

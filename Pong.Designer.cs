@@ -20,9 +20,6 @@
             base.Dispose(disposing);
         }
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem ajouterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.MenuStrip globalMenu;
         private System.Windows.Forms.ToolStripMenuItem actionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
@@ -36,6 +33,9 @@
         private System.Windows.Forms.Button buttonChangeMobileColor;
         private System.Windows.Forms.Button buttonIncreaseSpeed;
         private System.Windows.Forms.Button buttonDecreaseSpeed;
+        private System.Windows.Forms.ToolStripMenuItem cercleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem triangleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem murToolStripMenuItem;
     }
 }
 

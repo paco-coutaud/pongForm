@@ -11,12 +11,12 @@ namespace Pong
     /*This is an abstract class*/
     public abstract class Mobile : Forme
     {
-        protected int _vitesse; //Mobile's speed
+        public double _vitesse; //Mobile's speed
 
         /******************
         ****CONSTRUCTOR****
         ******************/
-        public Mobile(int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, int vitesse) : base(r,g,b,x,y,hauteur,largeur,orientation)
+        public Mobile(int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, double vitesse) : base(r,g,b,x,y,hauteur,largeur,orientation)
         {
             _vitesse = vitesse;
         }
