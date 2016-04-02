@@ -1,59 +1,35 @@
-﻿using System.Drawing;
+﻿/****************************
+****AUTHOR : Paco COUTAUD****
+****AUTHOR : Gauthier CASTRO*
+**LAST CHANGES : 02/03/2016**
+****************************/
+
+using System.Drawing;
 
 namespace Pong
 {
-    public abstract class Forme
+    public abstract class Shape
     {
-        public int _x { get; set; } //x for forme
-        public int _y { get; set; } //y for forme
-        public int _hauteur { get; set; }//hauteur for form
-        public int _largeur; //largeur for form
-        public double _orientation; //Orientation for forme
-        public Couleur _color; //Color for form
+        public int _x { get; set; } //Member variable _x with accessor and mutator, respect the encapsulation
+        public int _y { get; set; } //Member variable _y with accessor and mutator, respect the encapsulation
+        public int _height { get; set; }//Member variable _width with accessor and mutator, respect the encapsulation
+        public int _width{ get; set; } //Member variable _heught with accessor and mutator, respect the encapsulation
+        public double _orientation { get; set; }
+        public Couleur _color { get; set; }
         protected SolidBrush brush;
 
-        public Forme(int r,int g, int b,int x, int y, int hauteur, int largeur, double orientation) //Constructor
+        public Shape(int r,int g, int b,int x, int y, int height, int width, double orientation) //Constructor
         {
             //Initialize attributes
             _color = new Couleur(r, g, b);
             brush = new SolidBrush(_color.getColor());
             _x = x;
             _y = y;
-            _hauteur = hauteur;
-            _largeur = largeur;
+            _height = height;
+            _width = width;
             _orientation = orientation;
         }
 
-        public abstract void draw(Graphics e); //Dessine is abstract and need to be reimplemented in child class
-
-        public int getX()
-        {
-            return _x;
-        }
-
-        public int getY()
-        {
-            return _y;
-        }
-
-        public int getWidth()
-        {
-            return _largeur;
-        }
-
-        public int getHeight()
-        {
-            return _hauteur;
-        }
-
-        public double getOrientation()
-        {
-            return _orientation;
-        }
-
-        public void setOrientation(double orientation)
-        {
-            _orientation = orientation;
-        }
+        public abstract void draw(Graphics e); //Draw is abstract and need to be reimplemented in child class
     }
 }

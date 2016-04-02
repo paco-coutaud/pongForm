@@ -1,4 +1,10 @@
-﻿using System;
+﻿/****************************
+****AUTHOR : Paco COUTAUD****
+****AUTHOR : Gauthier CASTRO*
+**LAST CHANGES : 28/03/2016**
+****************************/
+
+using System;
 using System.Windows.Forms;
 
 namespace Pong
@@ -6,7 +12,7 @@ namespace Pong
     static class Program
     {
         /// <summary>
-        /// Point d'entrée principal de l'application.
+        /// Entry point
         /// </summary>
         [STAThread]
         static void Main()

@@ -9,16 +9,16 @@ using System.Drawing;
 namespace Pong
 {
     /*This is an abstract class*/
-    public abstract class Mobile : Forme
+    public abstract class Mobile : Shape
     {
-        public double _vitesse; //Mobile's speed
+        public double _speed { get; set; } //Mobile's speed
 
         /******************
         ****CONSTRUCTOR****
         ******************/
-        public Mobile(int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, double vitesse) : base(r,g,b,x,y,hauteur,largeur,orientation)
+        public Mobile(int r, int g, int b, int x, int y, int height, int width, double orientation, double speed) : base(r,g,b,x,y,height,width,orientation)
         {
-            _vitesse = vitesse;
+            _speed = speed;
         }
 
         /*****************

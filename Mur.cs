@@ -9,18 +9,18 @@ using System.Drawing;
 namespace Pong
 {
     /*This class provides methods to create and manipulate Walls*/
-    public class Wall : Forme
+    public class Wall : Shape
     {
-        private double _coefficient;
+        public double _coefficient { get; set; }
         private Rectangle _rec;
 
         /******************
         ****CONSTRUCTOR****
         ******************/
-        public Wall(int r, int g, int b, int x, int y, int hauteur, int largeur, int orientation, double coefficient) : base(r,g,b,x,y,hauteur,largeur,orientation)
+        public Wall(int r, int g, int b, int x, int y, int height, int width, int orientation, double coefficient) : base(r,g,b,x,y,height,width,orientation)
         {
             _coefficient = coefficient;
-            _rec = new Rectangle(_x, _y, _largeur, _hauteur);
+            _rec = new Rectangle(_x, _y, _width, _height);
         }
 
         /*****************
@@ -29,6 +29,13 @@ namespace Pong
         public override void draw(Graphics e)
         {
             e.FillRectangle(brush, _rec);
+        }
+
+        public static void preview(Graphics e, int x, int y)
+        {
+            SolidBrush n = new SolidBrush(Color.Black); //Wall has black color
+            e.FillRectangle(n, x, y, 40, 40); //Draw a wall on the windows forms surface
+            n.Dispose(); //Free the ressource
         }
     }
 }

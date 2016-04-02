@@ -10,28 +10,17 @@ using System.Drawing;
 namespace Pong
 {   
     /*This class provides methods to create and manipulate Circles*/
-    public class Circle : Mobile //Herite from Mobile
+    public class Circle : Mobile //Inherited from Mobile
     {
         private Rectangle _rec;
-        private double realX;
-        private double realY;
-
 
         /******************
         ****CONSTRUCTOR****
         ******************/
-        public Circle(int r, int g, int b, int x, int y, int hauteur, int largeur, double orientation, double vitesse) : base(r,g,b,x,y,hauteur,largeur,orientation,vitesse)
+        public Circle(int r, int g, int b, int x, int y, int height, int width, double orientation, double speed) : base(r,g,b,x,y,height,width,orientation,speed)
         {
             //Initialize attribute
-            _rec = new Rectangle(_x, _y, _largeur, _hauteur);
-            realX = x;
-            realY = y;
-            //_rec.Offset(_largeur / 2, _hauteur / 2);
-            //_rec.Location.Offset(_largeur / 2, _hauteur / 2);
-            //_rec.Location.= _largeur / 2;
-            //_rec.Location.Y
-            System.Diagnostics.Debug.WriteLine("Cercle, x : " + _x + " y : "+ _y);
-            System.Diagnostics.Debug.WriteLine("Centre : x : " + _rec.Location.X + "y: " + _rec.Location.Y);
+            _rec = new Rectangle(_x, _y, _width, _height);
         }
 
         /*****************
@@ -48,13 +37,10 @@ namespace Pong
         /*This method provides a simple way to move a circle*/
         public override void move()
         {
-            realX += (_vitesse * Math.Cos(_orientation * (Math.PI / 180)));
-            realY += (_vitesse * Math.Sin(_orientation * (Math.PI / 180)));
-            _x = (int)(realX);
-            _y = (int)(realY);
+            _x += (int)(_speed * Math.Cos(_orientation * (Math.PI / 180)));
+            _y += (int)(_speed * Math.Sin(_orientation * (Math.PI / 180)));
             _rec.X = _x;
             _rec.Y = _y;
-
         }
 
         /*****************
@@ -64,7 +50,9 @@ namespace Pong
         /*This static method provides a simple way to preview a circle element*/
         public static void preview(Graphics e,int x,int y)
         {
-            e.FillEllipse(new SolidBrush(Color.Black), new Rectangle(x, y, 20, 20));
+            SolidBrush n = new SolidBrush(Color.Black);
+            e.FillEllipse(n, new Rectangle(x, y, 20, 20));
+            n.Dispose();
         }
     }
 }
